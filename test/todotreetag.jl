@@ -1,5 +1,5 @@
 using Chain
-@testset "rexpressions.jl" begin
+@testset "todotreetag.jl" begin
     # # Basic test
     list_todotree = ["KEYNOTE", "CHECKPOINT", "(WARN|WARNING)"] # Make sure this list is identical with that in the project module
 

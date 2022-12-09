@@ -1,6 +1,4 @@
-# TODO: Consider move this (especially that are compatible with TODO trees) to an independent package
-
-# Matches "KEYNOTE: " in the very beginning of the line to [admonition "Note"](https://documenter.juliadocs.org/stable/showcase/#Admonitions)
+# Functions in this script matches tag such as "KEYNOTE: A Certain Header" in the very beginning of the line and replace it by [admonition "Note"](https://documenter.juliadocs.org/stable/showcase/#Admonitions), with A Certain Header preserved.
 
 """
 `gen_expr_startw(startingword)` returns the regular expression that matches what starts with `startingword` in a new line; it also matches the tailing immediatel colon (":") and whitespaces if any.
@@ -34,6 +32,9 @@ gen_expr_startw(startingword) = Regex("^$startingword\\:?[^\\S\\r\\n]*(?<myhead>
 """
 This macro generates variable named `expr_startw_...` using the expression generator `gen_expr_startw`. See `gen_expr_startw`.
 [Julia automatically generate functions and export them](https://stackoverflow.com/questions/31313040/julia-automatically-generate-functions-and-export-them)
+
+# Note
+This macro (**and also its test**) is superfluous and experimental for metaprogramming.
 """
 macro addmyexpressions_1(funs::String...)
     e = quote end  # start out with a blank quoted expression
