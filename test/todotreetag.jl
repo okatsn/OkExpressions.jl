@@ -1,4 +1,4 @@
-using Chain
+
 @testset "todotreetag.jl" begin
     # # Basic test
     list_todotree = ["KEYNOTE", "CHECKPOINT", "(WARN|WARNING)"] # Make sure this list is identical with that in the project module
@@ -33,7 +33,7 @@ using Chain
     @test !occursin(expr, "a = 1+1 # $(ukey1): Hello world") # inline keynote should be ignored
 
     # Test linbreak
-    #using Chain
+
     targetstr = """
     $(ukey1): My Title
     Hello world. My name is Foobar.
