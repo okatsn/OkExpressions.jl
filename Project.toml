@@ -1,7 +1,7 @@
 name = "OkExpressions"
 uuid = "2060839e-1c32-41f2-b945-b79b1f5cc0e8"
 authors = ["okatsn <okatsn@gmail.com> and contributors"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
