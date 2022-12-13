@@ -1,16 +1,19 @@
 """
+
+
 `expr_kwarg_int(keyword)` returns regular expression that matches integer after "\$keyword=".
 Noted that whitespace is allowed after "=" but NOT allowd before.
 
 # Example
 ```jldoctest exprkw
+
 expr = expr_kwarg_int("verbosity")
 str = "fit!(mach; verbosity= 5)"
-match(expr,str).match
+parse(Int, match(expr,str).match)
 
 # output
 
-"5"
+5
 ```
 
 ```jldoctest exprkw
@@ -19,7 +22,7 @@ match(expr,str)
 
 # output
 
-nothing
+
 ```
 
 """

@@ -29,10 +29,8 @@ end
 
 using Documenter
 @testset "DocTests" begin
-    makedocs(;sitename="Test Site",
-    root="../docs",
-    source="src",# directory relative to root
-    doctest=true)
+    DocMeta.setdocmeta!(OkExpressions, :DocTestSetup, :(using OkExpressions); recursive=true)
+    doctest(OkExpressions; manual = false)
 end
 
 # @testitem "test vscode testitem" begin
