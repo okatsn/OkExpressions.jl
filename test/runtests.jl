@@ -27,6 +27,13 @@ end
     end
 end
 
+using Documenter
+@testset "DocTests" begin
+    makedocs(;sitename="Test Site",
+    root="../docs",
+    source="src",# directory relative to root
+    doctest=true)
+end
 
 # @testitem "test vscode testitem" begin
 #     println("Only `@testitem` block will be detectable by vscode's test")
