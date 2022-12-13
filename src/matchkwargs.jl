@@ -4,7 +4,7 @@
 # Example
 ```jldoctest
 expr = expr_kwarg_int("verbosity")
-str = fit!(mach; verbosity = 5)
+str = "fit!(mach; verbosity = 5)"
 match(expr,str).match
 
 # output

@@ -1,7 +1,7 @@
 # Functions in this script matches tag such as "KEYNOTE: A Certain Header" in the very beginning of the line and replace it by [admonition "Note"](https://documenter.juliadocs.org/stable/showcase/#Admonitions), with A Certain Header preserved.
 
 """
-`gen_expr_startw(startingword)` returns the regular expression that matches what starts with `startingword` in a new line; it also matches the tailing immediatel colon (":") and whitespaces if any.
+`gen_expr_startw(startingword)` returns the regular expression that matches what starts with `startingword` in a new line; it also matches the tailing immediate colon (":") and whitespaces if any.
 After that, the remaining characters before a newline is stored as a group match of group name `myhead` that you can call it as shown in the following example:
 
 ```jldoctest label4keepvars
