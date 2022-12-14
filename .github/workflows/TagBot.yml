@@ -1,16 +1,75 @@
 name: TagBot
 on:
+  push:
+    paths:
+      - 'Project.toml'
+    branches:
+      - main
   issue_comment:
     types:
       - created
   workflow_dispatch:
 jobs:
+  UpdateOkReg:
+    # if: github.event_name == 'workflow_dispatch' || github.actor == 'JuliaTagBot'
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: 1.6.7
+      - uses: actions/checkout@v3 # see https://github.com/actions/checkout
+        with:
+          path: OkExpressions
+      - uses: actions/checkout@v3 # see https://github.com/actions/checkout
+        with:
+          repository: okatsn/OkRegistry
+          path: OkRegistry
+          token: ${{ secrets.ACCESS_OKREGISTRY }}
+    # actions/checkout clones repo
+      - run: |
+          cd OkRegistry
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions"
+          julia --project=@. -e '
+            using Pkg;
+            Pkg.instantiate();
+            Pkg.Registry.add(RegistrySpec(url = "https://github.com/okatsn/OkRegistry.git"));
+            include("add_local_pkg_to_registry.jl");
+            '
+    # Update OkRegistry first.
+    # 1. Current path is critical. Please refer to "add_local_pkg_to_registry.jl" in OkRegistry.
+    # 2. `git config` is required, and has to be done in repo OkRegistry (cd OkRegistry must precede)
+    # 3. Personal registry is add per julia install; that is, OkRegistry should be added before `Pkg.instantiate()`
   TagBot:
     if: github.event_name == 'workflow_dispatch' || github.actor == 'JuliaTagBot'
     runs-on: ubuntu-latest
     steps:
+      - run: echo "wait for 2 minutes for updating OkRegistry" && sleep 60
       - uses: JuliaRegistries/TagBot@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           ssh: ${{ secrets.DOCUMENTER_KEY }}
           registry: okatsn/OkRegistry
+          # If your registry is public, this is all you need to do.
+          # For more information, see [here](https://github.com/JuliaRegistries/TagBot#custom-registries)
+          changelog: |
+            ## {{ package }} {{ version }}
+            ${{github.event.head_commit.message}}
+            {% if previous_release %}
+            [Diff since {{ previous_release }}]({{ compare_url }})
+            {% endif %}
+            {% if custom %}
+            {{ custom }}
+            {% endif %}
+            {% if issues %}
+            **Closed issues:**
+            {% for issue in issues %}
+            - {{ issue.title }} (#{{ issue.number }})
+            {% endfor %}
+            {% endif %}
+            {% if pulls %}
+            **Merged pull requests:**
+            {% for pull in pulls %}
+            - {{ pull.title }} (#{{ pull.number }}) (@{{ pull.author.username }})
+            {% endfor %}
+            {% endif %}
