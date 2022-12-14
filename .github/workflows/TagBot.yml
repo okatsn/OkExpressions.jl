@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 jobs:
   TagBot:
-    if: github.event_name == 'workflow_dispatch' || github.actor == 'JuliaTagBot'
+    # if: github.event_name == 'workflow_dispatch' || github.actor == 'JuliaTagBot'
     runs-on: ubuntu-latest
     steps:
       - run: echo "wait for 2 minutes for updating OkRegistry" && sleep 60
