@@ -1,16 +1,15 @@
 name = "OkExpressions"
 uuid = "2060839e-1c32-41f2-b945-b79b1f5cc0e8"
 authors = ["okatsn <okatsn@gmail.com> and contributors"]
-version = "0.1.4"
-
-[deps]
-Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+version = "0.1.5"
 
 [compat]
 julia = "1.6"
 
 [extras]
+CompatHelperLocal = "5224ae11-6099-4aaa-941d-3aab004bd678"
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
-test = ["Test"]
+test = ["Test", "Documenter", "CompatHelperLocal"]

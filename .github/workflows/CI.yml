@@ -1,3 +1,7 @@
+# You have to set PAT and add secrete ACCESS_OKREGISTRY in the repo {{{PKG}}}
+# https://stevenmortimer.com/running-github-actions-sequentially/
+# see also the default template: https://github.com/JuliaCI/PkgTemplates.jl/blob/master/templates/github/workflows/register.yml
+
 name: CI
 on:
   push:

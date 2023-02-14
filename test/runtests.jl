@@ -30,9 +30,18 @@ end
 using Documenter
 @testset "DocTests" begin
     DocMeta.setdocmeta!(OkExpressions, :DocTestSetup, :(using OkExpressions); recursive=true)
-    doctest(OkExpressions; manual = false)
+    # using the package everywhere in the doc
+    # See also https://documenter.juliadocs.org/stable/man/doctests/#Setup-Code
+
+
+    doctest(OkExpressions; manual = false) # this makes jldoctest also be tested in a local test
 end
 
+using CompatHelperLocal
+@testset "CompatHelperLocal" begin
+    @test true
+    TF = CompatHelperLocal.@check() # This raise warning only.
+end
 # @testitem "test vscode testitem" begin
 #     println("Only `@testitem` block will be detectable by vscode's test")
 #     @test true
